@@ -1,0 +1,14 @@
+<div class="px-4 py-5 my-5 text-center">
+  <h1 class="display-5 fw-bold text-body-emphasis">Picto Speak</h1>
+  <br/><br/>
+
+  <div class="col-lg-6 mx-auto">
+    <%= form_with url: picto_speak_path, method: :post do |form| %>
+      <%= form.file_field :picture, accept: 'image/png, image/jpeg', required: true %>
+      <%= form.submit "Process" %>
+    <% end %>
+  </div>
+
+  <div id="audio_container">
+  </div>
+</div>

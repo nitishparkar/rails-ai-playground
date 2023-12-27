@@ -1,0 +1,37 @@
+<div id="audio_container">
+  <script>
+    (function() {
+      var audioData = "<%= audio_data %>";
+
+      console.log('Audio data loaded');
+
+      // Check if audioData is valid
+      if (!audioData) {
+        console.error('No audio data available');
+        return;
+      }
+
+      var decodedData = atob(audioData);
+      var byteArray = new Uint8Array(decodedData.split('').map(char => char.charCodeAt(0)));
+      var blob = new Blob([byteArray], { type: 'audio/mp3' });
+
+      // var blob = new Blob([audioData], { type: 'audio/mp3' });
+      var url = URL.createObjectURL(blob);
+      var audio = new Audio(url);
+
+      console.log('Audio object created');
+
+      // Error event listener
+      audio.onerror = function(event) {
+        console.error('Error in audio playback', event);
+      };
+
+      // Handle play promise
+      audio.play().then(function() {
+        console.log('Audio playback started successfully');
+      }).catch(function(error) {
+        console.error('Error occurred during audio playback', error);
+      });
+    })();
+  </script>
+</div>
